@@ -1,0 +1,38 @@
+{
+  "name": "install-types",
+  "version": "1.0.0",
+  "description": "Auto install typings for your package dependencies",
+  "main": "index.js",
+  "bin": {
+    "install-types": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "np"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ClearTax/install-types.git"
+  },
+  "keywords": [
+    "types",
+    "typings",
+    "postinstall",
+    "hooks",
+    "typescript",
+    "cleartax"
+  ],
+  "author": "Raj Anand",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ClearTax/install-types/issues"
+  },
+  "homepage": "https://github.com/ClearTax/install-types#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "typesync": "^0.6.1"
+  },
+  "devDependencies": {
+    "np": "^5.1.0"
+  }
+}
