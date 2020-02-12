@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { types } = require("types-directory");
 const without = require("lodash/without");
 const difference = require("lodash/difference");
@@ -6,7 +7,7 @@ const intersection = require("lodash/intersection");
 const {
   dependencies,
   devDependencies
-} = require(`${process.cwd()}/package.json`);
+} = JSON.parse((fs.readFileSync(`${process.cwd()}/package.json`)).toString());
 
 const defaultOptions = {
   exclude: []
@@ -20,8 +21,8 @@ const defaultOptions = {
 
 function typesyncer(options = defaultOptions) {
   // packages dependencies
-  const pDependencies = Object.keys(dependencies);
-  const pDevDependencies = Object.keys(devDependencies);
+  const pDependencies = Object.keys(dependencies || {});
+  const pDevDependencies = Object.keys(devDependencies || {});
 
   // all dependencies
   const allDeps = [...pDependencies, ...pDevDependencies];
