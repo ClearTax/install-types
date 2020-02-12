@@ -1,49 +1,55 @@
-#!/usr/bin/env node
+const { types } = require("types-directory");
+const without = require("lodash/without");
+const difference = require("lodash/difference");
+const intersection = require("lodash/intersection");
 
-const { spawn, execSync } = require("child_process");
-const chalk = require("chalk");
+const {
+  dependencies,
+  devDependencies
+} = require(`${process.cwd()}/package.json`);
 
-/**
- * Run npm install
- * @return {void}
- */
-const installDeps = () => {
-  console.log(chalk.cyan("Installing types for your dependencies.."));
-  const cmd = spawn(`npm`, ["install"], {
-    stdio: "inherit"
-  });
-  cmd.on("close", returnCode => {
-    process.exit(returnCode);
-  });
-};
-
-const NO_TYPINGS_PATTERN = new RegExp(/no new typings added/i);
-
-/**
- * Check if no types are added
- * @param {string} msg
- * @return {boolean}
- */
-const isTypingsIgnored = msg => {
-  if (msg && typeof msg === "string" && msg.length > 0) {
-    return NO_TYPINGS_PATTERN.test(msg);
-  }
-  return false;
+const defaultOptions = {
+  exclude: []
 };
 
 /**
- * Initialize method
- * @return {void}
+ * @function typesyncer sync types
+ * @param {*} [options=defaultOptions]
+ * @returns { install, uninstall dependencies}
  */
-const init = () => {
-  const stdout = execSync("typesync").toString();
-  if (isTypingsIgnored(stdout)) {
-    console.log(chalk.green(stdout));
-    process.exit(0);
-  } else {
-    console.log(chalk.yellow(stdout));
-    installDeps();
-  }
-};
 
-init();
+function typesyncer(options = defaultOptions) {
+  // packages dependencies
+  const pDependencies = Object.keys(dependencies);
+  const pDevDependencies = Object.keys(devDependencies);
+
+  // all dependencies
+  const allDeps = [...pDependencies, ...pDevDependencies];
+
+  // dependencies
+  const deps = without(allDeps, ...options.exclude);
+
+  // installed types
+  const typesInstalled = pDevDependencies.filter(
+    d => d.indexOf("@types/") === 0
+  );
+
+  // dependencies for all installed types
+  const depsTypes = typesInstalled.map(t => t.slice(7));
+
+  // unused types
+  const unusedTypes = difference(depsTypes, deps).map(t => `@types/${t}`);
+
+  // types available for dependencies
+  const typesAvailable = intersection(deps, types).map(t => `@types/${t}`);
+
+  // types to install
+  const typesToInstall = difference(typesAvailable, typesInstalled);
+
+  return {
+    install: typesToInstall,
+    uninstall: unusedTypes
+  };
+}
+
+module.exports = typesyncer;

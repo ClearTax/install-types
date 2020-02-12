@@ -1,14 +1,13 @@
 {
   "name": "install-types",
   "version": "1.0.1",
-  "description": "Auto install typings for your package dependencies",
+  "description": "Auto install(uninstall) typings for your package dependencies",
   "main": "index.js",
   "bin": {
-    "install-types": "./index.js",
-    "postinstall": "npm i typesync -g"
+    "install-types": "./bin/install-types.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "tap",
     "release": "np"
   },
   "repository": {
@@ -31,9 +30,12 @@
   "homepage": "https://github.com/ClearTax/install-types#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "typesync": "^0.6.1"
+    "lodash": "^4.17.15",
+    "types-directory": "^0.34.0",
+    "yargs": "^15.1.0"
   },
   "devDependencies": {
-    "np": "^5.1.0"
+    "np": "^5.1.0",
+    "tap": "^14.10.6"
   }
 }
