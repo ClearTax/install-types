@@ -33,7 +33,7 @@ const typesyncer = require("..");
     console.log(chalk.yellow("No new typings to install"));
   } else {
     const installCMD = `${installer} ${types.install.join(" ")}`;
-    console.log(chalk.green("Installing", types.install));
+    console.log(chalk.green("Installing", types.install.join(', ')));
     console.log(execSync(installCMD).toString());
   }
 
@@ -42,7 +42,7 @@ const typesyncer = require("..");
       console.log(chalk.yellow("No unused typing to remove"));
     } else {
       const uninstallCMD = `${uninstaller} ${types.uninstall.join(" ")}`;
-      console.log(chalk.green("Uninstalling", types.uninstall));
+      console.log(chalk.green("Uninstalling", types.uninstall.join(', ')));
       console.log(execSync(uninstallCMD).toString());
     }
   }
