@@ -36,7 +36,7 @@ function typesyncer(options = defaultOptions) {
   );
 
   // dependencies for all installed types
-  const depsTypes = typesInstalled.map(t => t.slice(7));
+  const depsTypes = without(typesInstalled.map(t => t.slice(7)), ...options.exclude);
 
   // unused types
   const unusedTypes = difference(depsTypes, deps).map(t => `@types/${t}`);
