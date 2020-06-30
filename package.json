@@ -35,6 +35,7 @@
     "yargs": "^15.1.0"
   },
   "devDependencies": {
+    "@types/tap": "^14.10.0",
     "np": "^5.1.0",
     "tap": "^14.10.6"
   }
