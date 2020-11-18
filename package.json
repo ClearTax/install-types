@@ -29,14 +29,14 @@
   },
   "homepage": "https://github.com/ClearTax/install-types#readme",
   "dependencies": {
-    "chalk": "^2.4.2",
-    "lodash": "^4.17.15",
-    "types-directory": "^0.119.0",
-    "yargs": "^15.1.0"
+    "chalk": "^4.1.0",
+    "lodash": "^4.17.20",
+    "types-directory": "^0.208.0",
+    "yargs": "^16.1.1"
   },
   "devDependencies": {
-    "@types/tap": "^14.10.0",
-    "np": "^5.1.0",
-    "tap": "^14.10.6"
+    "@types/tap": "^14.10.1",
+    "np": "^7.0.0",
+    "tap": "^14.11.0"
   }
 }
