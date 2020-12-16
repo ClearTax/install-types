@@ -1,6 +1,6 @@
 {
   "name": "install-types",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Auto install(uninstall) typings for your package dependencies",
   "main": "index.js",
   "bin": {
@@ -31,8 +31,8 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "lodash": "^4.17.20",
-    "types-directory": "^0.208.0",
-    "yargs": "^16.1.1"
+    "types-directory": "^0.224.0",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@types/tap": "^14.10.1",
