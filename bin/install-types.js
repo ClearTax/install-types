@@ -7,6 +7,7 @@ const yargs = require("yargs");
 const { argv } = yargs
   .boolean("yarn")
   .boolean("pnpm")
+  .boolean("bolt")
   .boolean("removeUnused")
   .array("exclude");
 
@@ -23,17 +24,20 @@ const typesyncer = require("..");
   } else if (argv.pnpm) {
     installer = "pnpm add -D";
     uninstaller = "pnpm remove";
+  } else if (argv.bolt) {
+    installer = "bolt add -D";
+    uninstaller = "bolt remove";
   }
 
   const types = typesyncer({
-    exclude: argv.exclude || []
+    exclude: argv.exclude || [],
   });
 
   if (types.install.length === 0) {
     console.log(chalk.yellow("No new typings to install"));
   } else {
     const installCMD = `${installer} ${types.install.join(" ")}`;
-    console.log(chalk.green("Installing", types.install.join(', ')));
+    console.log(chalk.green("Installing", types.install.join(", ")));
     console.log(execSync(installCMD).toString());
   }
 
@@ -42,7 +46,7 @@ const typesyncer = require("..");
       console.log(chalk.yellow("No unused typing to remove"));
     } else {
       const uninstallCMD = `${uninstaller} ${types.uninstall.join(" ")}`;
-      console.log(chalk.green("Uninstalling", types.uninstall.join(', ')));
+      console.log(chalk.green("Uninstalling", types.uninstall.join(", ")));
       console.log(execSync(uninstallCMD).toString());
     }
   }

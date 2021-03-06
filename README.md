@@ -4,7 +4,7 @@ Auto install (uninstall) typings for your package dependencies.
 
 ## Features
 
-- :package: Works with `npm`, `yarn`, `pnpm`
+- :package: Works with `npm`, `yarn`, `pnpm`, `bolt`
 - :sunny: Updated regularly
 - :palm_tree: In sync with [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
 - :fishing_pole_and_fish: Can be hooked with npm and husky hooks
@@ -64,6 +64,7 @@ You can use it directly in the cli if installed globally or can be used as a `po
 | ---------------- | ----------------------------- |
 | `--yarn`         | use `yarn` as package manager |
 | `--pnpm`         | use `pnpm` as package manager |
+| `--bolt`         | use `bolt` as package manager |
 | `--removeUnused` | remove unused types           |
 | `--exclude`      | exclude dependencies          |
 
